@@ -1,37 +1,35 @@
 #pragma once
-#include <map>
-#include <vector>
+#include <list>
 #include <algorithm>
+#include <shared_mutex>
+#include <string>
+#include "Barrier.h"
 class Datastorage
 {
 public:
 	Datastorage();
 	~Datastorage();
-	void AddData(std::string &newinformation) {
-		
-		std::replace(newinformation.begin(), newinformation.end(), ' ', '¬');
-		std::replace(newinformation.begin(), newinformation.end(), '#', ' ');
-		std::vector<std::string> array;
-		std::stringstream ss(newinformation);
-		std::string temp;
-		while (ss >> temp)
-			array.push_back(temp);
-
-		std::istringstream iss(newinformation);
-		char c; // dummy character for the colon
-		int a[8];
-		iss >> a[0];
-		for (int i = 1; i < 8; i++)
-			iss >> c >> a[i];
-
-		data.insert("", "");
-		data.insert(newinformation)
+	void AddData(std::string &newinformationtype, std::string &newinformation) {
+		simpleBarrier.count_down_and_wait();
+		lock.lock_shared();
+		if (std::find(data.begin(), data.end(), newinformationtype) != data.end())
+			data.insert(newinformation);
+		else
+			data.push_back(newinformationtype, newinformation);
+		whatsasbout.insert(newinformationtype);
+		data.insert(newinformationtype, newinformation);
+		lock.unlock_shared();
 	};
-	string ShowData(std::string type, int number) {
-		return data;
+	std::string ShowData(std::string type, std::string number) {
+		simpleBarrier.count_down_and_wait();
+		lock.lock_shared();
+		std::string output = data.at(type,number,);
+		lock.unlock_shared();
+		return output;
 	};
 private:
-	std::map<std::string,std::string> data;
-	std::vector<std::string> splitStrings;
+	std::list<std::list<std::string>> data;
+	std::shared_mutex lock;
+	Barrier simpleBarrier;
 };
 

@@ -110,11 +110,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Barrier.cpp" />
     <ClCompile Include="Datastorage.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="RequestParser.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Barrier.h" />
     <ClInclude Include="Datastorage.h" />
     <ClInclude Include="RequestParser.h" />
   </ItemGroup>

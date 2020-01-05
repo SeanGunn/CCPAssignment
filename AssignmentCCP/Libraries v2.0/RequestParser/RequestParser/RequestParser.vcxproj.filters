@@ -24,12 +24,18 @@
     <ClCompile Include="Datastorage.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Barrier.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="RequestParser.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Datastorage.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Barrier.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
