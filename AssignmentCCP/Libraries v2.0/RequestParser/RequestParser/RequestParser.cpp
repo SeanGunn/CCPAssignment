@@ -1,5 +1,5 @@
 #include <regex>
-
+#include "Datastorage.h"
 #include "RequestParser.h"
 
 PostRequest::PostRequest() : valid(0)
@@ -23,8 +23,9 @@ PostRequest PostRequest::parse(std::string request)
 	post.topicId = postMatch[1];
 	post.message = postMatch[2];
 	post.valid = 1;
-
-	return post;
+	//todo: check if meant to be here
+	dataUser.AddData(post.topicId, post.message, post.valid);
+	return post;//TODO: pass as asyc??? ask about that
 }
 
 std::string PostRequest::getTopicId()
@@ -63,8 +64,9 @@ ReadRequest ReadRequest::parse(std::string request)
 	read.topicId = readMatch[1];
 	read.postId = std::stoi(readMatch[2]);
 	read.valid = 1;
-
-	return read;
+	//todo: check if meant to be here
+	dataUser.ShowData(read.topicId, read.postId, read.valid);
+	return read;//TODO: pass as asyc??? ask about that
 }
 
 std::string ReadRequest::getTopicId()
@@ -102,8 +104,9 @@ CountRequest CountRequest::parse(std::string request)
 
 	count.topicId = countMatch[1];
 	count.valid = 1;
-
-	return count;
+	//todo: check if meant to be here
+	dataUser.CountData(count.topicId, count.valid);
+	return count;//TODO: pass as asyc??? ask about that
 }
 
 std::string CountRequest::getTopicId()

@@ -2,7 +2,7 @@
 #define __REQUESTPARSER_H
 
 #include <string>
-
+Datastorage dataUser;
 class PostRequest
 {
 public:
