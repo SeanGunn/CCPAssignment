@@ -1,12 +1,17 @@
 #include <conio.h>
+#include <vector>
+#include "Datastorage.h"
 #include <iostream>
 #include <string>
 #include <vector>
+#include <thread>
 
 #include "RequestParser.h"
 
 int main()
 {
+	//Datastorage* dataUser = new Datastorage();
+	//std::vector<std::thread> threadVector;
 	std::vector<std::string> requestList =
 	{
 		"POST@Solar system#The dark side of the @moon is #dark.",
@@ -31,6 +36,7 @@ int main()
 			std::cout << "Post request: " << post.toString() << std::endl;
 			std::cout << "Post topic: " << post.getTopicId() << std::endl;
 			std::cout << "Post message: " << post.getMessage() << std::endl;
+			//threadVector.emplace_back(dataUser->AddData, post.getTopicId(), post.getMessage(), post.valid);
 			continue;
 		}
 
@@ -40,6 +46,8 @@ int main()
 			std::cout << "Read request" << read.toString() << std::endl;
 			std::cout << "Read topic: " << read.getTopicId() << std::endl;
 			std::cout << "Read post id: " << read.getPostId() << std::endl;
+			//threadVector.emplace_back(dataUser->ShowData,read.getTopicId(),read.getPostId(),read.valid);
+			//dataUser->ShowData(read.getTopicId(), read.getPostId(), read.valid);
 			continue;
 		}
 
@@ -48,6 +56,8 @@ int main()
 		{
 			std::cout << "Count request: " << count.toString() << std::endl;
 			std::cout << "Count topic: " << count.getTopicId() << std::endl;
+			//threadVector.emplace_back(dataUser->CountData,count.getTopicId(),count.valid);
+			//dataUser->CountData(count.getTopicId(), count.valid);
 			continue;
 		}
 
@@ -61,7 +71,11 @@ int main()
 		std::cout << "Unknown request: " << request << std::endl;
 		std::cout << std::endl;
 	}
+	/*for (int i = 0; i < threadVector.size(); i++) {
+		threadVector[i].join;
+	}*/
 	_getch();
+
 
 	return 0;
 }

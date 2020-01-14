@@ -1,4 +1,5 @@
 #include <regex>
+#include <future>
 #include "Datastorage.h"
 #include "RequestParser.h"
 
@@ -24,7 +25,7 @@ PostRequest PostRequest::parse(std::string request)
 	post.message = postMatch[2];
 	post.valid = 1;
 	//todo: check if meant to be here
-	dataUser.AddData(post.topicId, post.message, post.valid);
+	//auto a = std::async(dataUser.AddData,post.topicId, post.message, post.valid);
 	return post;//TODO: pass as asyc??? ask about that
 }
 
@@ -65,8 +66,8 @@ ReadRequest ReadRequest::parse(std::string request)
 	read.postId = std::stoi(readMatch[2]);
 	read.valid = 1;
 	//todo: check if meant to be here
-	dataUser.ShowData(read.topicId, read.postId, read.valid);
-	return read;//TODO: pass as asyc??? ask about that
+	//auto a = std::async(dataUser.ShowData,read.topicId, read.postId, read.valid);
+	return a.get();//TODO: pass as asyc??? ask about that
 }
 
 std::string ReadRequest::getTopicId()
@@ -105,7 +106,8 @@ CountRequest CountRequest::parse(std::string request)
 	count.topicId = countMatch[1];
 	count.valid = 1;
 	//todo: check if meant to be here
-	dataUser.CountData(count.topicId, count.valid);
+	//auto a = std::async(dataUser.CountData,count.topicId, count.valid);
+	//std::string returnAnswer = std::string("CountResponse ") + a.get();
 	return count;//TODO: pass as asyc??? ask about that
 }
 

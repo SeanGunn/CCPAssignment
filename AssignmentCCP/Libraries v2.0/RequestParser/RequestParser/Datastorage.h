@@ -80,6 +80,34 @@ public:
 		}
 		return datasize = "Data parsed didn't contain valid sintax";
 	}
+	std::string ListData(bool isValid) {
+		std::string returnData;
+		if (isValid == true) {
+			simpleBarrier.count_down_and_wait();
+			lock.lock_shared();
+			if (data[2] != "") {
+				int countAlong = 0;
+				std::string temp = data[1];
+				countAlong = stoi(temp);
+				++countAlong;
+				returnData.append(data[1] +"#");
+				int i = 2 + countAlong;
+				while (i <= data.size)
+				{
+					temp = data[countAlong + i];
+					countAlong = countAlong + stoi(temp);
+					returnData.append(data[countAlong - 1]);
+					if ((i + data[countAlong]) < data.size()) {
+						returnData.append("#");
+					}
+					i = countAlong;
+				}
+			}
+			lock.unlock_shared();
+			return returnData;
+		}
+		return returnData = "Data parsed didn't contain valid sintax";
+	}
 private:
 	std::vector<std::string> data;
 	std::shared_mutex lock;
