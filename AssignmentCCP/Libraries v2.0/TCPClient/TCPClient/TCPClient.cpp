@@ -5,6 +5,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+
 #include "TCPClient.h"
 
 // Need to link with Ws2_32.lib, Mswsock.lib, and Advapi32.lib
@@ -146,3 +147,5 @@ void TCPClient::CloseConnection()
 	// cleanup
 	closesocket(ConnectSocket);
 }
+
+

@@ -20,6 +20,6 @@ private:
 	SOCKET ListenSocket;
 	unsigned short int port;
 	std::string portString;
-};
+}; 
 
 #endif __TCPSERVER_H
